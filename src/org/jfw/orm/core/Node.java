@@ -8,5 +8,4 @@ public interface Node {
 	String getId();
 	String getDisplay();
 	String getCode();
-	Class<NodeView> getViewClass();
 }
