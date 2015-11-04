@@ -9,6 +9,15 @@ public class Column extends AbstractNode{
 	private String dataEleId;
 	private boolean nullable;
 	private String comment;
+	private boolean defaultQuery;
+
+	public boolean isDefaultQuery() {
+		return defaultQuery;
+	}
+
+	public void setDefaultQuery(boolean defaultQuery) {
+		this.defaultQuery = defaultQuery;
+	}
 
 	public String getDataEleId() {
 		return dataEleId;

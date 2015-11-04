@@ -7,6 +7,8 @@ import org.jfw.orm.core.Node;
 import org.jfw.orm.core.impl.root.DataElementNode;
 import org.jfw.orm.core.impl.root.PackageNode;
 import org.jfw.orm.core.impl.root.TypeHandlerNode;
+import org.jfw.orm.core.impl.root.packages.Entry;
+import org.jfw.orm.core.impl.root.packages.Table;
 
 public class RootNode extends AbstractNode{
 	
@@ -28,11 +30,36 @@ public class RootNode extends AbstractNode{
 		}
 		return null;		
 	}
+	public PackageNode getPackageNodeWithChildId(String childId){
+		for(PackageNode pn:this.pacages){
+			if(pn.exists(childId))return pn;
+		}
+		return null;		
+	}
 	public TypeHandlerNode getTypeHandlerNode(String id){
 		for(TypeHandlerNode thn:this.handlers){
 			if(thn.getId().equals(id)) return thn;
 		}
 		return null;		
+	}
+	public Entry getEntry(String id){
+		for(PackageNode pn : this.pacages){
+			for(Entry en:pn.getEntrys()){
+				if(en.getId().equals(id)) return en;
+			}
+			for(Entry en:pn.getTables()){
+				if(en.getId().equals(id)) return en;
+			}
+		}
+		return null;
+	}
+	public Table getTable(String id){
+		for(PackageNode pn : this.pacages){
+			for(Table en:pn.getTables()){
+				if(en.getId().equals(id)) return en;
+			}
+		}
+		return null;
 	}
 	
 	

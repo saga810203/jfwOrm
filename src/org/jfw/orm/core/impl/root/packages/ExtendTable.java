@@ -3,10 +3,7 @@ package org.jfw.orm.core.impl.root.packages;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jfw.orm.core.Node;
-import org.jfw.orm.core.impl.AbstractNode;
-
-public class ExtendTable extends AbstractNode{
+public class ExtendTable extends PackageNode{
 	private String baseTableId;
 	private String comment;
 	private List<CalcColumn> columns = new LinkedList<CalcColumn>();	
@@ -28,10 +25,5 @@ public class ExtendTable extends AbstractNode{
 	}
 	public void setColumns(List<CalcColumn> columns) {
 		this.columns = columns;
-	}
-	@Override
-	public List<Node> children() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

@@ -11,7 +11,6 @@ public class DataElementNode extends AbstractNode {
 	private int dbTypePrecision=0;
 	private String typeHandlerId;
 	private boolean nullable;
-	private boolean inSelect;
 	private boolean inInsert;
 	private String fixSqlValueWithInsert;
 	private boolean inUpdate;
@@ -33,14 +32,6 @@ public class DataElementNode extends AbstractNode {
 
 	public void setNullable(boolean nullable) {
 		this.nullable = nullable;
-	}
-
-	public boolean isInSelect() {
-		return inSelect;
-	}
-
-	public void setInSelect(boolean inSelect) {
-		this.inSelect = inSelect;
 	}
 
 	public boolean isInInsert() {

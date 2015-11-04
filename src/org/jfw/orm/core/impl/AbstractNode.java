@@ -7,7 +7,28 @@ import org.jfw.orm.core.Node;
 public abstract class AbstractNode implements Node {
 	protected String id;
 	protected String code;
-	protected String display;	
+	protected String display;
+	
+	
+	public static String dbNameToJavaName(String name){
+		StringBuilder sb = new StringBuilder();
+		name = name.trim();
+		boolean upper= true;
+		for(int i  = 0 ; i < name.length() ; ++i){
+			char c = name.charAt(i);
+			if(c =='_') {
+				upper = true;
+				continue;
+			}
+			if(upper){
+				sb.append(Character.toUpperCase(c));
+				upper = false;
+			}else{
+				sb.append(Character.toLowerCase(c));
+			}
+		}
+		return sb.toString();
+	}
 	
 
 	@Override

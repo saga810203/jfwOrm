@@ -5,10 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jfw.orm.core.Node;
-import org.jfw.orm.core.impl.AbstractNode;
-
-public class Entry extends AbstractNode{
+public class Entry extends PackageNode{
 	private String parentId;
 	private String comment;
 	private List<Column> columns = new LinkedList<Column>();
@@ -57,9 +54,5 @@ public class Entry extends AbstractNode{
 	}
 	public void removeColumn(Column col){
 		this.removeColumn(col.getId());
-	}
-	@Override
-	public List<Node> children() {
-		return null;
 	}
 }

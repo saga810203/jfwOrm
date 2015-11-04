@@ -2,7 +2,8 @@ package org.jfw.orm.core.impl.root.packages;
 
 public class CalcColumn extends Column {
 	private String expression;
-	public boolean needRead()
+	@Override
+	public boolean isDefaultQuery()
 	{
 		return null!=this.expression&& expression.trim().length()>0;
 	}
