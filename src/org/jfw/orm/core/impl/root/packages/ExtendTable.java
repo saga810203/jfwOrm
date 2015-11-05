@@ -5,6 +5,9 @@ import java.util.List;
 
 public class ExtendTable extends PackageNode{
 	private String baseTableId;
+	private boolean baseIsExtendTable;
+
+
 	private String comment;
 	private List<CalcColumn> columns = new LinkedList<CalcColumn>();	
 	
@@ -25,5 +28,11 @@ public class ExtendTable extends PackageNode{
 	}
 	public void setColumns(List<CalcColumn> columns) {
 		this.columns = columns;
+	}
+	public boolean isBaseIsExtendTable() {
+		return baseIsExtendTable;
+	}
+	public void setBaseIsExtendTable(boolean baseIsExtendTable) {
+		this.baseIsExtendTable = baseIsExtendTable;
 	}
 }

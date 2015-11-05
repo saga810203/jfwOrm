@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class Table extends Entry{
+public class Table extends Entry implements Selectable,Updatable,Deletable{
 	
 	private List<String> keys = new LinkedList<String>();
 	public List<String> getKeys() {
