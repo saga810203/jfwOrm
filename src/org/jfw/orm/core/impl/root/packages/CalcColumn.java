@@ -2,6 +2,7 @@ package org.jfw.orm.core.impl.root.packages;
 
 public class CalcColumn extends Column {
 	private String expression;
+
 	@Override
 	public boolean isDefaultQuery()
 	{

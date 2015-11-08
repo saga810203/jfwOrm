@@ -1,20 +1,27 @@
 package org.jfw.orm.core.impl;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.jfw.orm.core.Node;
 import org.jfw.orm.core.impl.root.DataElementNode;
 import org.jfw.orm.core.impl.root.PackageNode;
 import org.jfw.orm.core.impl.root.TypeHandlerNode;
 import org.jfw.orm.core.impl.root.packages.Entry;
+import org.jfw.orm.core.impl.root.packages.ExtendTable;
+import org.jfw.orm.core.impl.root.packages.PersistentNode;
 import org.jfw.orm.core.impl.root.packages.Table;
 
 public class RootNode extends AbstractNode{
 	
+	
+	public final transient Map<String,Object> TemplateVariable = new HashMap<String,Object>();
 	private List<PackageNode> pacages = new LinkedList<PackageNode>();
 	private List<TypeHandlerNode> handlers = new LinkedList<TypeHandlerNode>();
 	private List<DataElementNode> dataEles = new LinkedList<DataElementNode>();
+	
 	
 	
 	public DataElementNode getDataElement(String id){
@@ -61,7 +68,22 @@ public class RootNode extends AbstractNode{
 		}
 		return null;
 	}
+	public ExtendTable getExtendTable(String id){
+		for(PackageNode pn : this.pacages){
+			for(ExtendTable en:pn.getExtendTables()){
+				if(en.getId().equals(id)) return en;
+			}
+		}
+		return null;
+	}
 	
+	public PersistentNode getPersistentNode(String id){
+		for(PackageNode pn : this.pacages){
+			PersistentNode po = pn.getPersistentNode(id);
+			if(po!=null) return po;
+		}
+		return null;
+	}
 	
 	
 

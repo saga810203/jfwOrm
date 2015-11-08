@@ -10,7 +10,7 @@ public class Column extends AbstractNode{
 	private boolean nullable;
 	private String comment;
 	private boolean defaultQuery;
-
+	
 	public boolean isDefaultQuery() {
 		return defaultQuery;
 	}
@@ -40,6 +40,12 @@ public class Column extends AbstractNode{
 
 	public void setNullable(boolean nullable) {
 		this.nullable = nullable;
+	}
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		return null!=obj&&(obj instanceof Column)&&this.code.equals(((Column)obj).getCode());
 	}
 
 	@Override

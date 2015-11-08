@@ -1,14 +1,17 @@
 package org.jfw.orm.core.impl.root.packages;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ExtendTable extends PackageNode{
+import org.jfw.orm.core.impl.RootNode;
+
+public class ExtendTable extends PersistentNode{
+
 	private String baseTableId;
 	private boolean baseIsExtendTable;
 
-
-	private String comment;
 	private List<CalcColumn> columns = new LinkedList<CalcColumn>();	
 	
 	public String getBaseTableId() {
@@ -17,12 +20,7 @@ public class ExtendTable extends PackageNode{
 	public void setBaseTableId(String baseTableId) {
 		this.baseTableId = baseTableId;
 	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+	
 	public List<CalcColumn> getColumns() {
 		return columns;
 	}
@@ -34,5 +32,29 @@ public class ExtendTable extends PackageNode{
 	}
 	public void setBaseIsExtendTable(boolean baseIsExtendTable) {
 		this.baseIsExtendTable = baseIsExtendTable;
+	}
+	@Override
+	public List<Column> getAllDefineColumn(RootNode rn) {
+		List<Column> oList = null;
+		if(this.baseIsExtendTable){
+			ExtendTable et = rn.getExtendTable(baseTableId);
+			oList = et.getAllDefineColumn(rn);
+		}else{
+		Table parent =rn.getTable(baseTableId);
+		oList = parent.getAllDefineColumn(rn);}
+		List<Column> list = new ArrayList<Column>(oList.size()+this.columns.size());
+		list.addAll(oList);
+		list.addAll(this.columns);
+		return Collections.unmodifiableList(list);
+	}
+	@Override
+	public String getFromSentence(RootNode rn) {
+		Table t = rn.getTable(this.baseTableId);
+		return t.getFromSentence(rn);
+	}
+
+	@Override
+	public String getParentPersistentNodeId(RootNode rn) {
+		return this.baseTableId;
 	}
 }

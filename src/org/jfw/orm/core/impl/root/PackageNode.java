@@ -7,6 +7,7 @@ import org.jfw.orm.core.Node;
 import org.jfw.orm.core.impl.AbstractNode;
 import org.jfw.orm.core.impl.root.packages.Entry;
 import org.jfw.orm.core.impl.root.packages.ExtendTable;
+import org.jfw.orm.core.impl.root.packages.PersistentNode;
 import org.jfw.orm.core.impl.root.packages.Table;
 import org.jfw.orm.core.impl.root.packages.View;
 
@@ -68,5 +69,20 @@ public class PackageNode extends AbstractNode {
 			if(en.getId().equals(childId)) return true;
 		}
 		return false;
+	}
+	public PersistentNode getPersistentNode(String id){
+		for(PersistentNode en:this.entrys){
+			if(en.getId().equals(id)) return en;
+		}
+		for(PersistentNode en:this.tables){
+			if(en.getId().equals(id)) return en;
+		}
+		for(PersistentNode en:this.extendTables){
+			if(en.getId().equals(id)) return en;
+		}
+		for(PersistentNode en:this.views){
+			if(en.getId().equals(id)) return en;
+		}
+		return null;
 	}
 }

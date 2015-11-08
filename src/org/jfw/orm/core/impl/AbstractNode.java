@@ -8,8 +8,7 @@ public abstract class AbstractNode implements Node {
 	protected String id;
 	protected String code;
 	protected String display;
-	
-	
+	protected String comment;
 	public static String dbNameToJavaName(String name){
 		StringBuilder sb = new StringBuilder();
 		name = name.trim();
@@ -57,5 +56,13 @@ public abstract class AbstractNode implements Node {
 	}
 	public void setDisplay(String display) {
 		this.display = display;
+	}
+	public String getComment() {
+		return comment;
+	}
+
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 }

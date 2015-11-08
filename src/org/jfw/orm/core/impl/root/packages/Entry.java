@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Entry extends PackageNode{
+import org.jfw.orm.core.impl.RootNode;
+
+public class Entry extends PersistentNode{
 	private String parentId;
-	private String comment;
 	private List<Column> columns = new LinkedList<Column>();
-	private transient Entry parent;
 	
 	public String getParentId() {
 		return parentId;
@@ -17,28 +17,18 @@ public class Entry extends PackageNode{
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
 	}
-	public Entry getParent() {
-		return parent;
-	}
-	public void setParent(Entry parent) {
-		this.parent = parent;
-	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	public List<Column> getColumns() {
-		if(this.parent==null){
-			return Collections.unmodifiableList(this.columns);
-		}else{
-			List<Column> oList = this.parent.getColumns();
+	@Override
+	public List<Column> getAllDefineColumn(RootNode rn){
+		if(this.parentId!=null&& this.parentId.trim().length()>0){
+			Entry parent = rn.getEntry(parentId);
+			List<Column> oList = parent.getAllDefineColumn(rn);
 			List<Column> list = new ArrayList<Column>(oList.size()+this.columns.size());
 			list.addAll(oList);
 			list.addAll(this.columns);
 			return Collections.unmodifiableList(list);
+			
 		}
+		return Collections.unmodifiableList(this.columns);
 	}
 	public void addColumn(Column col){
 		this.columns.add(col);
@@ -54,5 +44,14 @@ public class Entry extends PackageNode{
 	}
 	public void removeColumn(Column col){
 		this.removeColumn(col.getId());
+	}
+	@Override
+	public String getFromSentence(RootNode rn) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public String getParentPersistentNodeId(RootNode rn) {
+		return this.parentId;
 	}
 }

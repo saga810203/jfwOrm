@@ -10,7 +10,8 @@ public interface OrmHandler {
 
     //write   PreparedStatement ps;
 	//        int paramIndex = 1;
-	void init(StringBuilder sb,String valueEl,boolean userTempalteVar,boolean dbNullable,Map<String,Object> localVarInMethod);
+	void init(StringBuilder sb,String valueEl,boolean userTempalteVar,boolean dbNullable,boolean useFilter,Map<String,Object> localVarInMethod);
+	void prepare(StringBuilder sb);	
 	/*
 	 * sb.append("if(");
 	 * OrmHandler.checkNull(sb);

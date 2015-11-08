@@ -10,15 +10,6 @@ public class TypeHandlerNode extends AbstractNode {
 	private String supperHandlerId;
 	private boolean abstracted;
 	private String supportClassName;
-	private String comment;
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
 
 	public String getCodeContent() {
 		return codeContent;

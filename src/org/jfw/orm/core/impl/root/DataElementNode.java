@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jfw.orm.core.Node;
 import org.jfw.orm.core.impl.AbstractNode;
+import org.jfw.orm.core.impl.RootNode;
 
 public class DataElementNode extends AbstractNode {
 	private String dbType;
@@ -16,15 +17,7 @@ public class DataElementNode extends AbstractNode {
 	private boolean inUpdate;
 	private String fixSqlValueWithUpdate;
 	private boolean searchable;
-	private String comment;
 	
-	public String getComment() {
-		return comment;
-	}
-	
-	public void setComment(String descp) {
-		this.comment = descp;
-	}
 
 	public boolean isNullable() {
 		return nullable;
@@ -104,6 +97,10 @@ public class DataElementNode extends AbstractNode {
 
 	public void setTypeHandlerId(String typeHandlerId) {
 		this.typeHandlerId = typeHandlerId;
+	}
+	
+	public TypeHandlerNode getTypeHandlerNode(RootNode rn){
+		return rn.getTypeHandlerNode(this.typeHandlerId);
 	}
 
 	@Override
