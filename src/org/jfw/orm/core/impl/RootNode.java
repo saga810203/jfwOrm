@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jfw.orm.core.Node;
+import org.jfw.orm.core.OrmHandler;
 import org.jfw.orm.core.impl.root.DataElementNode;
 import org.jfw.orm.core.impl.root.PackageNode;
 import org.jfw.orm.core.impl.root.TypeHandlerNode;
@@ -21,6 +22,7 @@ public class RootNode extends AbstractNode{
 	private List<PackageNode> pacages = new LinkedList<PackageNode>();
 	private List<TypeHandlerNode> handlers = new LinkedList<TypeHandlerNode>();
 	private List<DataElementNode> dataEles = new LinkedList<DataElementNode>();
+	public final transient Map<String,Class<OrmHandler>> ormHandlers = new HashMap<String,Class<OrmHandler>>();
 	
 	
 	

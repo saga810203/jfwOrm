@@ -3,7 +3,9 @@ package org.jfw.orm.core.impl.root;
 import java.util.List;
 
 import org.jfw.orm.core.Node;
+import org.jfw.orm.core.OrmHandler;
 import org.jfw.orm.core.impl.AbstractNode;
+import org.jfw.orm.core.impl.RootNode;
 
 public class TypeHandlerNode extends AbstractNode {
 	private String codeContent;
@@ -41,6 +43,14 @@ public class TypeHandlerNode extends AbstractNode {
 
 	public void setSupportClassName(String supportClassName) {
 		this.supportClassName = supportClassName;
+	}
+	
+	public OrmHandler getOrmHandler(RootNode rn){
+		try {
+			return rn.ormHandlers.get(this.id).newInstance();
+		} catch (Exception e) {
+			throw new RuntimeException("can't create object with typeHandler.id="+this.id);
+		}
 	}
 
 	@Override

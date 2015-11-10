@@ -32,11 +32,9 @@ public abstract class DataOperateMethod extends AbstractNode {
 	public abstract void buildParams(StringBuilder sb, RootNode rn);
 	public abstract void buildHandleResult(StringBuilder sb,RootNode rn);
 	public abstract void buildSql(StringBuilder sb,RootNode rn);
-	public abstract void clean();
+	public abstract void cleanAfterGenerated();
 	public void generateMethodCode(StringBuilder sb, RootNode rn){
-		
-		
-		
+
 		this.prepare(sb, rn);
 		
 		this.buildSql(sb, rn);
@@ -54,7 +52,7 @@ public abstract class DataOperateMethod extends AbstractNode {
 		
 		sb.append("}finally{try{ps.close();}catch(Exception e){}");
 		sb.append("}");	
-		this.clean();
+		this.cleanAfterGenerated();
 	}
 
 	public List<MethodParam> getParams() {

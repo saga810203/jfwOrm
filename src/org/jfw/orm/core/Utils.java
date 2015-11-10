@@ -15,6 +15,9 @@ public class Utils {
 	public static boolean isPrimitive(Class<?> clazz){
 		return wrapClass.containsKey(clazz);
 	}
+	public static String getWrapClass(String className){
+		return wrapClassName.get(className);
+	}
 	
 	public static void appendFieldNameToMethodName(String name ,StringBuilder sb){
 		if(name.length()>1){
