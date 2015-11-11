@@ -8,10 +8,11 @@ import org.jfw.orm.core.impl.AbstractNode;
 import org.jfw.orm.core.impl.RootNode;
 
 public class TypeHandlerNode extends AbstractNode {
+	public static final String PACKAGE_NAME="org.jfw.orm.core.ormhandler.impl";
+	
 	private String codeContent;
 	private String supperHandlerId;
 	private boolean abstracted;
-	private String supportClassName;
 
 	public String getCodeContent() {
 		return codeContent;
@@ -37,13 +38,10 @@ public class TypeHandlerNode extends AbstractNode {
 		this.abstracted = abstracted;
 	}
 
-	public String getSupportClassName() {
-		return supportClassName;
+	public String getSupportClassName(RootNode rn) {
+		return this.getOrmHandler(rn).supportsClass().getName();
 	}
 
-	public void setSupportClassName(String supportClassName) {
-		this.supportClassName = supportClassName;
-	}
 	
 	public OrmHandler getOrmHandler(RootNode rn){
 		try {
@@ -51,6 +49,12 @@ public class TypeHandlerNode extends AbstractNode {
 		} catch (Exception e) {
 			throw new RuntimeException("can't create object with typeHandler.id="+this.id);
 		}
+	}
+	
+	
+	public String getJavaCode()
+	{
+		return null;
 	}
 
 	@Override

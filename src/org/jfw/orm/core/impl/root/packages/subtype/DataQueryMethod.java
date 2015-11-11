@@ -25,6 +25,19 @@ public class DataQueryMethod extends DataOperateMethod {
 
 	private Map<String, String> attributes = new HashMap<String, String>();
 
+	public void storeAttrbutes(FieldsDefine fd, FilterParamDefine fpd) {
+		this.attributes.clear();
+		this.attributes.putAll(fd.getAttributes());
+		this.fieldsDefineClass = fd.getClass().getName();
+		if (fpd != null) {
+			this.attributes.putAll(fpd.getAttributes());
+		}
+
+		this.filterParamDefineClass = fpd == null ? null : fpd.getClass()
+				.getName();
+
+	}
+
 	@Override
 	public boolean isDynamicSql(RootNode rn) {
 		return this.fpd.isDynamic();
@@ -85,49 +98,56 @@ public class DataQueryMethod extends DataOperateMethod {
 			if (list.size() > 1) {
 				sb.append(this.fd.getResultSetType()).append(" obj = new ")
 						.append(this.fd.getResultSetType()).append("();");
-				for(int i = 0 ; i < list.size(); ++i){
+				for (int i = 0; i < list.size(); ++i) {
 					Column col = list.get(i);
 					DataElementNode den = rn.getDataElement(col.getDataEleId());
-					TypeHandlerNode thn = den.getTypeHandlerNode(rn);					
+					TypeHandlerNode thn = den.getTypeHandlerNode(rn);
 					ohd = thn.getOrmHandler(rn);
-					String fieldName =dbNameToJavaName(list.get(i).getCode());
-					String methodName = fieldName.substring(0,1).toUpperCase(Locale.ENGLISH);
-					if(fieldName.length()>1) methodName = methodName+fieldName.substring(1);
-					ohd.readValue(sb, "obj.set"+methodName+"(", ");\r\n", i, col.isNullable()
-							&& den.isNullable(), rn.TemplateVariable);
+					String fieldName = dbNameToJavaName(list.get(i).getCode());
+					String methodName = fieldName.substring(0, 1).toUpperCase(
+							Locale.ENGLISH);
+					if (fieldName.length() > 1)
+						methodName = methodName + fieldName.substring(1);
+					ohd.readValue(sb, "obj.set" + methodName + "(", ");\r\n",
+							i, col.isNullable() && den.isNullable(),
+							rn.TemplateVariable);
 				}
-				
+
 			} else {
 				sb.append(this.fd.getResultSetType()).append(" obj;\r\n");
 				Column col = list.get(0);
 				DataElementNode den = rn.getDataElement(col.getDataEleId());
-				TypeHandlerNode thn = den.getTypeHandlerNode(rn);					
+				TypeHandlerNode thn = den.getTypeHandlerNode(rn);
 				ohd = thn.getOrmHandler(rn);
 				ohd.readValue(sb, "obj=", ";\r\n", 0, list.get(0).isNullable()
 						&& rn.getDataElement(list.get(0).getDataEleId())
 								.isNullable(), rn.TemplateVariable);
-				
+
 			}
 			sb.append("objs.add(obj);\r\n");
 		} else {
 			if (list.size() > 1) {
-				sb.append(" obj = new ").append(this.fd.getResultSetType()).append("();");
-				for(int i = 0 ; i < list.size(); ++i){
+				sb.append(" obj = new ").append(this.fd.getResultSetType())
+						.append("();");
+				for (int i = 0; i < list.size(); ++i) {
 					Column col = list.get(i);
 					DataElementNode den = rn.getDataElement(col.getDataEleId());
-					TypeHandlerNode thn = den.getTypeHandlerNode(rn);					
+					TypeHandlerNode thn = den.getTypeHandlerNode(rn);
 					ohd = thn.getOrmHandler(rn);
-					String fieldName =dbNameToJavaName(list.get(i).getCode());
-					String methodName = fieldName.substring(0,1).toUpperCase(Locale.ENGLISH);
-					if(fieldName.length()>1) methodName = methodName+fieldName.substring(1);
-					ohd.readValue(sb, "obj.set"+methodName+"(", ");\r\n", i, col.isNullable()
-							&& den.isNullable(), rn.TemplateVariable);
+					String fieldName = dbNameToJavaName(list.get(i).getCode());
+					String methodName = fieldName.substring(0, 1).toUpperCase(
+							Locale.ENGLISH);
+					if (fieldName.length() > 1)
+						methodName = methodName + fieldName.substring(1);
+					ohd.readValue(sb, "obj.set" + methodName + "(", ");\r\n",
+							i, col.isNullable() && den.isNullable(),
+							rn.TemplateVariable);
 				}
-				
+
 			} else {
 				Column col = list.get(0);
 				DataElementNode den = rn.getDataElement(col.getDataEleId());
-				TypeHandlerNode thn = den.getTypeHandlerNode(rn);					
+				TypeHandlerNode thn = den.getTypeHandlerNode(rn);
 				ohd = thn.getOrmHandler(rn);
 				ohd.readValue(sb, "obj=", ";\r\n", 0, list.get(0).isNullable()
 						&& rn.getDataElement(list.get(0).getDataEleId())
@@ -223,6 +243,50 @@ public class DataQueryMethod extends DataOperateMethod {
 
 	}
 
+	public boolean isMultiRows() {
+		return multiRows;
+	}
+
+	public void setMultiRows(boolean multiRows) {
+		this.multiRows = multiRows;
+	}
+
+	public String getFieldsDefineClass() {
+		return fieldsDefineClass;
+	}
+
+	public void setFieldsDefineClass(String fieldsDefineClass) {
+		this.fieldsDefineClass = fieldsDefineClass;
+	}
+
+	public String getDirective() {
+		return directive;
+	}
+
+	public void setDirective(String directive) {
+		this.directive = directive;
+	}
+
+	public String getFilterParamDefineClass() {
+		return filterParamDefineClass;
+	}
+
+	public void setFilterParamDefineClass(String filterParamDefineClass) {
+		this.filterParamDefineClass = filterParamDefineClass;
+	}
+
+	public String getOtherSentence() {
+		return otherSentence;
+	}
+
+	public void setOtherSentence(String otherSentence) {
+		this.otherSentence = otherSentence;
+	}
+
+	public Map<String, String> getAttributes() {
+		return attributes;
+	}
+
 	public static final FilterParamDefine EMPTY_FILTER_PARAM_DEFINE = new FilterParamDefine() {
 
 		@Override
@@ -241,6 +305,11 @@ public class DataQueryMethod extends DataOperateMethod {
 
 		@Override
 		public void writeParam(StringBuilder sb) {
+		}
+
+		@Override
+		public Map<String, String> getAttributes() {
+			throw new UnsupportedOperationException();
 		}
 	};
 }

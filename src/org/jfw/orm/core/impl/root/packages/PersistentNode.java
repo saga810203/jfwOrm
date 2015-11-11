@@ -71,7 +71,7 @@ public abstract class PersistentNode extends AbstractNode {
 		sb.append(Contants.SP_4).append("private ");
 		DataElementNode den = rn.getDataElement(col.getDataEleId());
 		TypeHandlerNode thn = rn.getTypeHandlerNode(den.getTypeHandlerId());
-		sb.append(thn.getSupportClassName()).append(" ").append(dbNameToJavaName(col.getCode().trim()))
+		sb.append(thn.getSupportClassName(rn)).append(" ").append(dbNameToJavaName(col.getCode().trim()))
 				.append(";\r\n\r\n");
 
 	}
@@ -95,7 +95,7 @@ public abstract class PersistentNode extends AbstractNode {
 		String name = dbNameToJavaName(col.getCode());
 		DataElementNode den = rn.getDataElement(col.getDataEleId());
 		TypeHandlerNode thn = rn.getTypeHandlerNode(den.getTypeHandlerId());
-		String className = thn.getSupportClassName().trim();
+		String className = thn.getSupportClassName(rn).trim();
 
 		sb.append(Contants.SP_4).append("public ").append(className);
 		if (className.equals("boolean"))

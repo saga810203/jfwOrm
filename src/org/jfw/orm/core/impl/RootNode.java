@@ -1,5 +1,6 @@
 package org.jfw.orm.core.impl;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -85,6 +86,11 @@ public class RootNode extends AbstractNode{
 			if(po!=null) return po;
 		}
 		return null;
+	}
+	
+	
+	public static void generateJavaFile(File file,RootNode rn){
+		
 	}
 	
 	
