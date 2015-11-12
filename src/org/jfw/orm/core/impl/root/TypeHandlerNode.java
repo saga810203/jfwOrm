@@ -52,9 +52,24 @@ public class TypeHandlerNode extends AbstractNode {
 	}
 	
 	
-	public String getJavaCode()
+	
+	public String getJavaCode(RootNode rn)
 	{
-		return null;
+		StringBuilder sb = new StringBuilder();
+		sb.append("package ").append(PACKAGE_NAME).append(";\r\n");
+		sb.append("public ");
+		if(this.abstracted){
+			sb.append("abstract ");
+		}
+		sb.append("class ").append(this.code);
+		if(this.supperHandlerId==null||this.supperHandlerId.trim().length()==0){
+			sb.append(" implements org.jfw.orm.core.OrmHandler{");
+		}else{
+			sb.append(" extends ").append(rn.getTypeHandlerNode(supperHandlerId).getCode()).append(" {");
+		}
+		sb.append(this.codeContent);
+		sb.append("}");		
+		return sb.toString();
 	}
 
 	@Override

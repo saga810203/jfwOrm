@@ -10,7 +10,7 @@ public interface OrmHandler {
 
     //write   PreparedStatement ps;
 	//        int paramIndex = 1;
-	void init(StringBuilder sb,String valueEl,boolean userTempalteVar,boolean dbNullable,boolean useFilter,Map<String,Object> localVarInMethod);
+	void init(String valueEl,boolean userTempalteVar,boolean dbNullable,boolean useFilter,boolean dynamicFilter,Map<String,Object> localVarInMethod);
 	void prepare(StringBuilder sb);	
 	/*
 	 * sb.append("if(");
@@ -23,7 +23,6 @@ public interface OrmHandler {
 	 */	
 	void checkNull(StringBuilder sb);	
 	//使用 "paramIndex++" 局部变量 
-	void writeNullValue(StringBuilder sb);
 	void writeValue(StringBuilder sb);
 	boolean isReplaceResource();
 	void replaceResource(StringBuilder sb);

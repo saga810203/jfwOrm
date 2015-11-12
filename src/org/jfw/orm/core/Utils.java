@@ -1,5 +1,8 @@
 package org.jfw.orm.core;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -25,6 +28,15 @@ public class Utils {
 		}else if(name.length()>0){
 			sb.append(name.substring(0,1).toUpperCase(Locale.ENGLISH));
 		}
+	}
+	public static byte[] toByteArray(InputStream in) throws IOException{
+		byte[] buf = new byte[4096];
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		int len=0;
+		while((len=in.read(buf))>=0){
+			baos.write(buf,0, len);
+		}
+		return baos.toByteArray();
 	}
 	
 	

@@ -14,7 +14,6 @@ import org.jfw.orm.core.impl.root.packages.CalcColumn;
 import org.jfw.orm.core.impl.root.packages.Column;
 
 public class DataQueryMethod extends DataOperateMethod {
-
 	private boolean multiRows = false;
 	private String fieldsDefineClass = null;
 	private transient FieldsDefine fd = null;
@@ -210,6 +209,8 @@ public class DataQueryMethod extends DataOperateMethod {
 				if (col.getCode() != null && col.getCode().trim().length() > 0) {
 					sb.append(" ").append(col.getCode().trim());
 				}
+			}else{
+				sb.append(col.getCode().trim());
 			}
 		}
 	}
