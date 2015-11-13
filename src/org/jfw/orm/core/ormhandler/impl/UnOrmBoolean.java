@@ -46,20 +46,17 @@ public class UnOrmBoolean extends BaseOrmHandler {
 	@Override
 	public void writeValue(StringBuilder sb) {
 		sb.append("if(").append(this.valueEl).append("){\r\n")
-		.append("ps")
-		
+		.append("ps.setString(paramIndex++,\"1\");\r\n}else{\r\n")
+		.append("ps.setString(paramIndex++,\"0\");\r\n}\r\n");		
 	}
 
 	@Override
 	public boolean isReplaceResource() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void replaceResource(StringBuilder sb) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

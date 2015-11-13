@@ -1,9 +1,5 @@
 package org.jfw.orm.core.impl.root.packages.subtype.impl;
 
-import java.util.Map;
-
-import org.jfw.orm.core.impl.RootNode;
-import org.jfw.orm.core.impl.root.packages.subtype.DataQueryMethod;
 
 public class ViewFieldsDefine extends PersistentObjectFieldsDefine{
 	private transient String fromSentence;
@@ -14,8 +10,8 @@ public class ViewFieldsDefine extends PersistentObjectFieldsDefine{
 	}
 
 	@Override
-	public void init(DataQueryMethod dqm, RootNode rn) {
-		super.init(dqm, rn);		
+	public void initIntenal() {
+		super.initIntenal();		
 		this.fromSentence = rn.getView(this.poid).getFromSentence();
 	}
 }

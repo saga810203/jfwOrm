@@ -1,43 +1,53 @@
 package org.jfw.orm.core.impl.root.packages.subtype.impl;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import org.jfw.orm.core.impl.RootNode;
+import org.jfw.orm.core.impl.root.packages.CalcColumn;
 import org.jfw.orm.core.impl.root.packages.Column;
-import org.jfw.orm.core.impl.root.packages.subtype.DataQueryMethod;
-import org.jfw.orm.core.impl.root.packages.subtype.FieldsDefine;
 
-public class SingleColumnFieldsDefine implements FieldsDefine {
+public class SingleColumnFieldsDefine extends AbstractFieldsDefine {
+	protected String fieldSentence;
+	protected String fromSentence;
+	protected String dataElementId;
 
-	@Override
-	public void init(DataQueryMethod dqm, RootNode rn) {
-		// TODO Auto-generated method stub
-		
+	
+	@Override 
+	protected void initIntenal(){
+		this.fieldSentence = this.readAttr("fieldSentence");
+		this.fromSentence = this.readAttr("fromSentence");
+		this.dataElementId = this.readAttr("dataElementId");
+
 	}
+	
 
 	@Override
 	public String getResultSetType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.rn.getDataElement(this.dataElementId).getTypeHandlerNode(rn).getOrmHandler(rn).supportsClass().getName();
 	}
 
 	@Override
 	public List<Column> getColumns() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Column> list = new ArrayList<Column>();
+		CalcColumn col = new CalcColumn();
+		col.setExpression(this.fieldSentence.trim());
+		list.add(col);
+		return list;
 	}
 
 	@Override
 	public String getFromSentence() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.fromSentence;
 	}
 
+
 	@Override
-	public Map<String, String> getAttributes() {
-		// TODO Auto-generated method stub
-		return null;
+	protected void stroeAttributes() {
+		this.saveAttr("fieldSentence",this.fieldSentence);
+		this.saveAttr("fromSentence",this.fromSentence);
+		this.saveAttr("dataElementId",this.fromSentence);
 	}
+
+	
 
 }
