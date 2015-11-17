@@ -2,7 +2,7 @@ package org.jfw.orm.core.impl.root.packages.subtype.impl;
 
 
 public class ViewFieldsDefine extends PersistentObjectFieldsDefine{
-	private transient String fromSentence;
+	private String fromSentence;
 
 	@Override
 	public String getFromSentence() {

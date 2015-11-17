@@ -2,7 +2,7 @@ package org.jfw.orm.core.impl.root.packages.subtype.impl;
 
 
 public class TableFieldsDefine extends PersistentObjectFieldsDefine{
-	private transient String table;
+	private String table;
 	
 	@Override
 	public void initIntenal() {

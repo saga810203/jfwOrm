@@ -1,6 +1,7 @@
 package org.jfw.orm.core.impl;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.jfw.orm.core.Node;
 
@@ -11,7 +12,7 @@ public abstract class AbstractNode implements Node {
 	protected String comment;
 	public static String dbNameToJavaName(String name){
 		StringBuilder sb = new StringBuilder();
-		name = name.trim();
+		name = name.trim().toLowerCase(Locale.ENGLISH);
 		boolean upper= true;
 		for(int i  = 0 ; i < name.length() ; ++i){
 			char c = name.charAt(i);

@@ -11,8 +11,8 @@ public abstract class PersistentObjectFieldsDefine extends AbstractFieldsDefine{
 	
 	
 	protected String poid;
-	protected transient List<Column> cols;
-	protected transient String resultSetType; 
+	protected List<Column> cols;
+	protected String resultSetType; 
 
 	@Override
 	protected void initIntenal() {

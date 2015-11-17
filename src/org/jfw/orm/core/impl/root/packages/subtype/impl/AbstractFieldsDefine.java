@@ -8,9 +8,9 @@ import org.jfw.orm.core.impl.root.packages.subtype.DataQueryMethod;
 import org.jfw.orm.core.impl.root.packages.subtype.FieldsDefine;
 
 public abstract class AbstractFieldsDefine implements FieldsDefine{
-	protected transient RootNode rn;
-	protected transient DataQueryMethod dqm;
-	protected transient Map<String,String> attributes; 
+	protected RootNode rn;
+	protected DataQueryMethod dqm;
+	protected Map<String,String> attributes; 
 	
 	@Override
 	public void init(DataQueryMethod dqm, RootNode rn) {

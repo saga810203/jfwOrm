@@ -3,7 +3,7 @@ package org.jfw.orm.core.impl.root.packages.subtype.impl;
 
 public class EntryFieldsDefine extends PersistentObjectFieldsDefine{
 	private String tableid;
-	private transient String table;
+	private String table;
 
 	@Override
 	public String getFromSentence() {
